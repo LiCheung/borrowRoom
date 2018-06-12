@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jll.mapper.ApplicationMapper">
+    <resultMap id="applicationMap" type="com.jll.entity.Application">
+        <id property="id" column="id"/>
+        <result property="faculty" column="faculty"/>
+        <result property="teacher" column="teacher"/>
+        <result property="phone" column="phone"/>
+        <result property="participant" column="participant"/>
+        <result property="classroom" column="classroom"/>
+        <result property="count" column="count"/>
+        <result property="reason" column="reason"/>
+        <result property="week_num" column="week_num"/>
+        <result property="week" column="week"/>
+        <result property="class_start" column="class_start"/>
+        <result property="class_end" column="class_end"/>
+        <result property="state" column="state"/>
+        <result property="date" column="date"/>
+        <result property="application_name" column="application_name"/>
+    </resultMap>
+
+    <insert id="insertApplication" parameterType="com.jll.entity.Application">
+        INSERT INTO application (faculty,teacher,phone,participant,classroom,count,reason,week_num,week,class_start,class_end,date)
+        VALUES (#{faculty},#{teacher},#{phone},#{participant},#{classroom},#{count},#{reason},#{week_num},#{week},#{class_start},#{class_end},#{date});
+        <selectKey keyProperty="id" order="AFTER" resultType="int">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <select id="getApplicationList" resultMap="applicationMap">
+        select * from application;
+    </select>
+
+    <!--<select id="getDayOffList" resultMap="dayoffM
+     ap">
+        select * from dayoff;
+    </select>
+
+    <select id="getDayOffResult" parameterType="String" resultMap="dayoffMap">
+        select * from dayoff
+        WHERE name = #{name}
+        AND readState = 'unread';
+    </select>
+
+    <update id="setDayOffState" parameterType="com.attendance.entity.DayOff">
+        UPDATE dayoff SET state = #{state}
+        WHERE id = #{id};
+    </update>-->
+
+</mapper>
