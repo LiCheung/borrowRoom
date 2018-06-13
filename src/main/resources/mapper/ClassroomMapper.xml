@@ -10,7 +10,7 @@
 
     <insert id="addClassroom" parameterType="com.jll.entity.Classroom">
         INSERT INTO classroom (name)
-        VALUES (#{name}});
+        VALUES (#{name});
         <selectKey keyProperty="id" order="AFTER" resultType="int">
             SELECT LAST_INSERT_ID()
         </selectKey>
