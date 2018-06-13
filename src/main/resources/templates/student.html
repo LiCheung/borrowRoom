@@ -6,13 +6,20 @@
     <title>易班——借教室（学生）</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <!--    <link href="../static/css/bootstrap-datepicker.min.css" rel="stylesheet">-->
     <!--[if lt IE 9]>
-    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!--   <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>-->
     <![endif]-->
-    <link href="/css/styles.css" rel="stylesheet">
-    <link href="/css/student.css" rel="stylesheet">
+    <link href="../static/css/styles.css" rel="stylesheet">
+    <link href="../static/css/student.css" rel="stylesheet">
+ <!--   <link href="../static/css/bootstrap-datepicker.min.css" rel="stylesheet">-->
 </head>
+<!--<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker').datetimepicker();
+    });
+</script>-->
 <body>
 <div class="wrapper">
     <div class="box">
@@ -22,13 +29,18 @@
             <!-- 左边侧边栏-->
             <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-                <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
+                    <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i class="glyphicon glyphicon-chevron-right"></i></a></li>
                 </ul>
 
                 <ul class="nav hidden-xs" id="lg-menu">
-                    <li>
+                    <li data-toggle="collapse" data-target="#student">
                         <a href="#">
-                            <i class="glyphicon glyphicon-user"></i>王二（学生）
+                            <i class="glyphicon glyphicon-user "></i>王二（学生）
+                        </a>
+                    </li>
+                    <li id="student" class="in collapse ">
+                        <a href="#">
+                            <i class="glyphicon"></i>申请成为管理员
                         </a>
                     </li>
                     <li id="apply" class="active">
@@ -58,7 +70,8 @@
                             <!--找教室-->
                             <div id="zhaojiaoshi">
                                 <div id="search">
-                                    <div class="form-group col-sm-3">
+                                    <div class="row">
+                                        <div class="form-group col-sm-2">
                                         <select id="teach_build" class="form-control" >
                                             <option>明理楼</option>
                                             <option>明德楼</option>
@@ -66,22 +79,23 @@
                                             <option>明智楼</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-sm-3">
-                                        <select id="area" class="form-control" >
-                                            <option value="A">A区</option>
-                                            <option value="B">B区</option>
-                                            <option value="C">C区</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <select id="floor" class="form-control" >
-                                            <option value="1">一楼</option>
-                                            <option value="2">二楼</option>
-                                            <option value="3">三楼</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-sm-3">
-                                        <button id="search_btn" type="submit" class="btn btn-default">搜索</button>
+                                        <div class="form-group col-sm-2">
+                                            <select id="area" class="form-control" >
+                                                <option value="A">A区</option>
+                                                <option value="B">B区</option>
+                                                <option value="C">C区</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <select id="floor" class="form-control" >
+                                                <option value="1">一楼</option>
+                                                <option value="2">二楼</option>
+                                                <option value="3">三楼</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                                <button id="search_btn" type="submit" class="btn btn-default ">搜索</button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="classrooms">
@@ -100,140 +114,111 @@
                                     <div class="col-sm-2 col-xs-6">
                                         <a href="#"><div class="classroom">明理楼A105</div></a>
                                     </div>
+                                    <div class="col-sm-2 col-xs-6">
+                                        <a href="#"><div class="classroom">明理楼A105</div></a>
+                                    </div>
+                                    <div class="col-sm-2 col-xs-6 ">
+                                        <a href="#"><div class="classroom borrowed">明理楼A105</div></a>
+                                    </div>
                                 </div>
                             </div>
                             <!--/找教室-->
                             <!--教室申请表-->
                             <form id="jiaoshishenqin" class="form-horizontal" role="form" action="/save">
-                                <!--<div class="form-group">
-                                    <label class="col-sm-2 control-label">Email</label>
-                                    <div class="col-sm-10">
-                                        <p class="form-control-static">email@example.com</p>
-                                    </div>
-                                </div>-->
                                 <h1>西南石油大学教室借用申请表</h1>
                                 <div class="form-group">
                                     <label for="unit" class="col-sm-2 control-label">申请单位</label>
                                     <div class="col-sm-4">
-                                        <input type="txt" class="form-control" id="unit" name="faculty" placeholder="请输入申请单位" >
+                                        <input type="text" class="form-control" id="unit" name="faculty" placeholder="请输入申请单位" >
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="teacher" class="col-sm-2 control-label">负责老师</label>
                                     <div class="col-sm-4">
-                                        <input type="txt" class="form-control" id="teacher" name="teacher" placeholder="请输入负责老师">
+                                        <input type="text" class="form-control" id="teacher" name="teacher" placeholder="请输入负责老师">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="tel" class="col-sm-2 control-label">联系电话</label>
                                     <div class="col-sm-4">
-                                        <input type="txt" class="form-control" id="tel" name="phone" placeholder="请输入联系电话">
+                                        <input type="text" class="form-control" id="tel" name="phone" placeholder="请输入联系电话">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="attendee" class="col-sm-2 control-label">参加人员</label>
                                     <div class="col-sm-4">
-                                        <input type="txt" class="form-control" id="attendee" name="participant" placeholder="请输入参加人员">
+                                        <input type="text" class="form-control" id="attendee" name="participant" placeholder="请输入参加人员">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                <label for="numbers" class="col-sm-2 control-label">人数</label>
-                                <div class="col-sm-4">
-                                    <input type="txt" class="form-control" id="numbers" name="count" placeholder="请输入参与人数">
+                                    <label for="numbers" class="col-sm-2 control-label">人数</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="numbers" name="count" placeholder="请输入参与人数">
+                                    </div>
                                 </div>
-                            </div>
                                 <div class="form-group">
                                     <label  class="col-sm-2 control-label">申请教室</label>
                                     <div class="col-sm-4">
                                         <p class="form-control-static" id="apply-classroom" name="classroom"></p>
                                     </div>
                                 </div>
-                                <!--教室类型-->
-                               <!-- <div class="form-group">
-                                    <label for="numbers" class="col-sm-2 control-label">教室类型</label>
-                                    <div class="col-sm-2">
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="jiaoshileixing" value="option1" checked> 普通教室
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" name="jiaoshileixing" value="option2">多功能教室
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>-->
-                                <!--/教室类型-->
                                 <div class="form-group">
                                     <label class="control-label col-sm-2">借用教室事由</label>
                                     <textarea id="reason" class="form-control" name="reason" rows="3"></textarea>
                                 </div>
+                                <!--借用日期-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">借用日期</label>
+                                        <div class="col-md-2 col-sm-5">
+                                            <input type="text" class="form-control" id="year" name="participant" placeholder="年">
+                                        </div>
+                                        <div class="col-md-2 col-sm-5">
+                                            <input type="text" class="form-control" id="month" name="participant" placeholder="月">
+                                        </div>
+                                        <div class="col-md-2 col-sm-5">
+                                            <input type="text" class="form-control" id="date" name="participant" placeholder="日">
+                                        </div>
+                                </div>
+                                <!--/借用日期-->
                                 <!--借用时间-->
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">借用时间</label>
                                     <div class="col-md-2 col-sm-5">
-                                        <select class="form-control" id="week_num" name="week_num">
-                                            <option>第1周</option>
-                                            <option>第2周</option>
-                                            <option>第3周</option>
-                                            <option>第4周</option>
-                                            <option>第5周</option>
-                                        </select>
+                                        <input type="text" class="form-control" id="start-hour" name="participant" placeholder="时">
                                     </div>
                                     <div class="col-md-2 col-sm-5">
-                                        <select class="form-control" id="week" name="week">
-                                            <option>周一</option>
-                                            <option>周二</option>
-                                            <option>周三</option>
-                                            <option>周四</option>
-                                            <option>周五</option>
-                                            <option>周六</option>
-                                            <option>周日</option>
-                                        </select>
+                                        <input type="text" class="form-control" id="start-minute" name="participant" placeholder="分">
                                     </div>
-                                    <div class="col-md-2 col-sm-5 col-xs-5">
-                                        <select class="form-control" id="class_start" name="class_start">
-                                            <option>第1节</option>
-                                            <option>第2节</option>
-                                            <option>第3节</option>
-                                            <option>第4节</option>
-                                            <option>第5节</option>
-                                            <option>第6节</option>
-                                            <option>第7节</option>
-                                            <option>第8节</option>
-                                            <option>第9节</option>
-                                            <option>第10节</option>
-                                            <option>第11节</option>
-                                            <option>第12节</option>
-                                        </select>
+                                    <label class="col-sm-1 control-label">到</label>
+                                    <div class="col-md-2 col-sm-5">
+                                        <input type="text" class="form-control" id="end-hour" name="participant" placeholder="时">
                                     </div>
-                                    <label class="col-sm-1 col-xs-1 control-label">到</label>
-                                    <div class="col-md-2 col-sm-5 col-xs-5">
-                                        <select class="form-control" id="class_end" name="class_end">
-                                            <option>第1节</option>
-                                            <option>第2节</option>
-                                            <option>第3节</option>
-                                            <option>第4节</option>
-                                            <option>第5节</option>
-                                            <option>第6节</option>
-                                            <option>第7节</option>
-                                            <option>第8节</option>
-                                            <option>第9节</option>
-                                            <option>第10节</option>
-                                            <option>第11节</option>
-                                            <option>第12节</option>
-                                        </select>
+                                    <div class="col-md-2 col-sm-5">
+                                        <input type="text" class="form-control" id="end-minute" name="participant" placeholder="分">
                                     </div>
                                 </div>
+
                                 <!--/借用时间-->
                                 <button type="button" id="return" class="col-sm-offset-2 btn btn-default">返回</button>
                                 <button type="submit" id="submit" class="btn btn-default">提交</button>
                             </form>
-                            <!--/教室申请表-->
-                            <!--申请结果-->
+
+                            <div id="borrow-situation">
+                                <table class="table table-hover">
+                                    <caption>明理楼A区101教室借用情况</caption>
+                                    <thead>
+                                    <tr>
+                                        <th>申请单位</th>
+                                        <th>使用时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-default">填写申请表</button>
+                            </div>
+
+
                             <table id="result-table"  class="table table-hover">
                                 <caption>申请教室结果</caption>
                                 <thead>
@@ -246,13 +231,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <!--<tr>
-                                        <td>翼灵物联网</td>
-                                        <td>明理楼A101</td>
-                                        <td>第1周周一第一节到第二节</td>
-                                        <td>未审批<button class="btn btn-default cancel">撤销</button></td>
-                                        <td>2018/5/20 16:51</td>
-                                    </tr>-->
+                                <!--<tr>
+                                    <td>翼灵物联网</td>
+                                    <td>明理楼A101</td>
+                                    <td>第1周周一第一节到第二节</td>
+                                    <td>未审批<button class="btn btn-default cancel">撤销</button></td>
+                                    <td>2018/5/20 16:51</td>
+                                </tr>-->
                                 </tbody>
                             </table>
                             <!--/申请结果-->
@@ -267,34 +252,38 @@
     </div>
 </div>
 
-    <!--post modal-->
-    <div id="postModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    Update Status
-                </div>
-                <div class="modal-body">
-                    <form class="form center-block">
-                        <div class="form-group">
-                            <textarea class="form-control input-lg" autofocus="" placeholder="What do you want to share?"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <div>
-                        <button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Post</button>
-                        <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+<!--post modal-->
+<div id="postModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                Update Status
+            </div>
+            <div class="modal-body">
+                <form class="form center-block">
+                    <div class="form-group">
+                        <textarea class="form-control input-lg" autofocus="" placeholder="What do you want to share?"></textarea>
                     </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Post</button>
+                    <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
                 </div>
             </div>
         </div>
     </div>
-    <!-- script references -->
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/scripts.js"></script>
-    <script src="/js/student.js"></script>
+</div>
+<!-- script references -->
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/scripts.js"></script>
+<script src="../static/js/student.js"></script>
+<!--<script src="../static/js/bootstrap-datepicker.js"></script>
+<script src="../static/js/bootstrap-datepicker.fr.min.js"></script>-->
+
+<!--    <script src="../static/js/bootstrap-datepicker.js"></script>-->
 </body>
 </html>

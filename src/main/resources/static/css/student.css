@@ -34,19 +34,23 @@ h1{
 #classrooms .classroom{
     height: 150px;
     width: 150px;
-    background-color: #dedede;
     text-align: center;
     line-height: 150px;
+    border: 1px lightgray solid;
+    background-color: lightgray;
 }
 #result-table td{
     height: 30px;
     line-height: 30px;
 }
-#result-table caption{
+#result-table caption,#borrow-situation caption{
     font-size: 22px;
 }
 #result-table .cancel{
     margin:auto 10px;
     background-color: #888;
     color: white;
+}
+.borrowed{
+    color: darkgray;
 }
