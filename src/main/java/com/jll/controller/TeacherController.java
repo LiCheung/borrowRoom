@@ -16,19 +16,13 @@ public class TeacherController {
     @Autowired
     private ClassroomService classroomService;
 
-    @RequestMapping("/teacher")
-    public String teacher(){
+    @RequestMapping("/manage")
+    public String manage(){
         return "teacher";
     }
 
     @RequestMapping("/addClassroom")
     public void addClassroom(Classroom classroom){
         classroomService.addClassroom(classroom);
-    }
-
-    @RequestMapping("/getClassroomList")
-    public List<Classroom> getClassroomList(){
-        List<Classroom> classrooms = classroomService.getClassroomList();
-        return classrooms;
     }
 }

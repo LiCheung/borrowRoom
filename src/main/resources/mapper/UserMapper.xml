@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jll.mapper.UserMapper">
+    <resultMap id="userMap" type="com.jll.entity.User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="yiban_id" column="yiban_id"/>
+        <result property="role" column="role"/>
+        <result property="manager_application" column="manager_application"/>
+    </resultMap>
+
+    <insert id="addUser" parameterType="com.jll.entity.User">
+        INSERT INTO user (name,yiban_id)
+        VALUES (#{name},#{yiban_id});
+        <selectKey keyProperty="id" order="AFTER" resultType="int">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="updateUserRole" parameterType="com.jll.entity.User">
+        UPDATE user SET role = #{role}
+        WHERE yiban_id = #{yiban_id};
+    </update>
+
+    <update id="beManager" parameterType="com.jll.entity.User">
+        UPDATE user SET manager_application = #{manager_application}
+        WHERE yiban_id = #{yiban_id};
+    </update>
+</mapper>

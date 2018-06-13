@@ -2,13 +2,16 @@ package com.jll.controller;
 
 import com.jll.entity.Application;
 import com.jll.entity.Classroom;
+import com.jll.entity.User;
 import com.jll.service.ApplicationService;
 import com.jll.service.ClassroomService;
+import com.jll.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by LES on 2018/6/10.
@@ -21,11 +24,8 @@ public class StudentController {
     @Autowired
     private ClassroomService classroomService;
 
-    @RequestMapping("/")
-    public String view(){
-        System.out.println("yeah");
-        return "student";
-    }
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/save")
     public String save(Application application){
@@ -40,5 +40,17 @@ public class StudentController {
         classroom.setState("已借出");
         classroomService.updateClassroomState(classroom);
         return "student";
+    }
+
+    @RequestMapping("/getClassroomList")
+    public List<Classroom> getClassroomList(){
+        List<Classroom> classrooms = classroomService.getClassroomList();
+        return classrooms;
+    }
+
+    @RequestMapping("/beManager")
+    public void beManager(){
+        User user = new User();
+        userService.beManager(user);
     }
 }
