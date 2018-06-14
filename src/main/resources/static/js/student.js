@@ -17,7 +17,7 @@ $(document).ready(function() {
         $("#result-table").show();
     });
 
-    $("#search_btn").click(function () {
+   /* $("#search_btn").click(function () {
         var teach_build = $("#teach_build").val();
         var area = $("#area").val();
         var floor = $("#floor").val();
@@ -27,7 +27,7 @@ $(document).ready(function() {
             var room =  teach_build + area + floor + r ;
             $("#classrooms").find(".classroom").eq(i-1).html(room);
         }
-    });
+    });*/
         /*      var n = parseInt(rooms());
          var code = '';
       for(var i=1;parseInt(i)<= n;i++){
@@ -42,7 +42,7 @@ $(document).ready(function() {
         var area = $("#area").val();
         var floor = $("#floor").val();
         $.ajax({
-            url: "",
+            url: "save",
             type: "GET",
             data:
                 {
@@ -52,7 +52,7 @@ $(document).ready(function() {
                 },
             success: function (result) {
                 $.each(result.data, function (index, item) {
-                    var r = item[index].val();
+                    var r = item.room.val();
                     var room =  teach_build + area + floor + r ;
                     $("#classrooms").find(".classroom").eq(index-1).html(room);
                 });
