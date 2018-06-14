@@ -42,7 +42,7 @@ $(document).ready(function() {
         var area = $("#area").val();
         var floor = $("#floor").val();
         $.ajax({
-            url: "save",
+            url: "/getClassroomList",
             type: "GET",
             data:
                 {
@@ -51,9 +51,8 @@ $(document).ready(function() {
                     "floor" : floor
                 },
             success: function (result) {
-                $.each(result.data, function (index, item) {
-                    var r = item.room.val();
-                    var room =  teach_build + area + floor + r ;
+                $.each(result, function (index, item) {
+                    var room =  teach_build + area + floor + item.room ;
                     $("#classrooms").append("<div class='col-sm-2 col-xs-6'><a href='#'><div class='classroom'>"+ room +"</div></a></div>");
                 });
             }
