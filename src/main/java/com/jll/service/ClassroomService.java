@@ -22,8 +22,8 @@ public class ClassroomService implements ClassroomMapper {
     }
 
     @Override
-    public List<Classroom> getClassroomList() {
-        List<Classroom> classrooms = classroomMapper.getClassroomList();
+    public List<Classroom> getClassroomList(Classroom classroom) {
+        List<Classroom> classrooms = classroomMapper.getClassroomList(classroom);
         return classrooms;
     }
 

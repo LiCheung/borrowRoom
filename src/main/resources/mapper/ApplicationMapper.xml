@@ -32,6 +32,15 @@
         select * from application;
     </select>
 
+    <select id="getApplicationListByRoom" resultMap="applicationMap">
+        select * from application
+        WHERE classroom = #{classroom};
+    </select>
+
+    <update id="updateApplicationState" parameterType="com.jll.entity.Application">
+        UPDATE application SET state = #{state}
+        WHERE id = #{id};
+    </update>
     <!--<select id="getDayOffList" resultMap="dayoffM
      ap">
         select * from dayoff;

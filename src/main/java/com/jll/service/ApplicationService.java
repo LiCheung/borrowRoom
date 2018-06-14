@@ -26,4 +26,14 @@ public class ApplicationService implements ApplicationMapper {
         List<Application> applications = applicationMapper.getApplicationList();
         return applications;
     }
+
+    @Override
+    public void updateApplicationState(Application application) {
+        applicationMapper.updateApplicationState(application);
+    }
+
+    @Override
+    public List<Application> getApplicationListByRoom(String room) {
+        return applicationMapper.getApplicationListByRoom(room);
+    }
 }

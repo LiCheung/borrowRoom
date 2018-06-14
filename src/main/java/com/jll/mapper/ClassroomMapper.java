@@ -1,5 +1,6 @@
 package com.jll.mapper;
 
+import com.jll.entity.Application;
 import com.jll.entity.Classroom;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public interface ClassroomMapper {
     void addClassroom(Classroom classroom);
 
-    List<Classroom> getClassroomList();
+    List<Classroom> getClassroomList(Classroom classroom);
 
     /*void updateClassroomState(Classroom classroom);*/
 }

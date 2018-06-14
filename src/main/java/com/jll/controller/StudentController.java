@@ -9,6 +9,7 @@ import com.jll.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,8 +52,10 @@ public class StudentController {
     }
 
     @RequestMapping("/getClassroomList")
-    public List<Classroom> getClassroomList(){
-        List<Classroom> classrooms = classroomService.getClassroomList();
+    @ResponseBody
+    public List<Classroom> getClassroomList(Classroom classroom){
+        List<Classroom> classrooms = classroomService.getClassroomList(classroom);
+        System.out.println(classrooms);
         return classrooms;
     }
 
@@ -60,5 +63,12 @@ public class StudentController {
     public void beManager(){
         User user = new User();
         userService.beManager(user);
+    }
+
+    @RequestMapping("/getApplicationListByRoom")
+    @ResponseBody
+    public List<Application> getApplicationListByRoom(Classroom classroom){
+        String room = classroom.getBuilding() + classroom.getArea() + classroom.getFloor() + classroom.getRoom();
+        return applicationService.getApplicationListByRoom(room);
     }
 }

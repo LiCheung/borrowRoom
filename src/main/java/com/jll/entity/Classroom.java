@@ -8,6 +8,8 @@ import lombok.Data;
 @Data
 public class Classroom {
     private Integer id;
-    private String name;
-    private String state;
+    private String building;
+    private String area;
+    private Integer floor;
+    private String room;
 }

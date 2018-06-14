@@ -1,6 +1,8 @@
 package com.jll.controller;
 
+import com.jll.entity.Application;
 import com.jll.entity.Classroom;
+import com.jll.service.ApplicationService;
 import com.jll.service.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,13 +18,28 @@ public class TeacherController {
     @Autowired
     private ClassroomService classroomService;
 
+    @Autowired
+    private ApplicationService applicationService;
+
     @RequestMapping("/manage")
     public String manage(){
         return "teacher";
     }
 
     @RequestMapping("/addClassroom")
-    public void addClassroom(Classroom classroom){
+    public String addClassroom(Classroom classroom){
         classroomService.addClassroom(classroom);
+        return "teacher";
+    }
+
+    @RequestMapping("/getApplicationList")
+    public List<Application> getApplicationList(){
+        return applicationService.getApplicationList();
+    }
+
+    @RequestMapping("/updateApplicationState")
+    public String updateApplicationState(Application application){
+        applicationService.updateApplicationState(application);
+        return "teacher";
     }
 }
