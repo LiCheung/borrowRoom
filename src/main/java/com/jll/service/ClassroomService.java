@@ -27,8 +27,8 @@ public class ClassroomService implements ClassroomMapper {
         return classrooms;
     }
 
-    @Override
+    /*@Override
     public void updateClassroomState(Classroom classroom) {
         classroomMapper.updateClassroomState(classroom);
-    }
+    }*/
 }

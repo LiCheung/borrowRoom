@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -29,16 +30,23 @@ public class StudentController {
 
     @RequestMapping("/save")
     public String save(Application application){
-        System.out.println(application);
         Date date = new Date();
+        System.out.println(date);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(dateFormat.format(date));
+
         application.setDate(new java.sql.Date(date.getTime()));
         System.out.println(application.getDate());
         applicationService.insertApplication(application);
 
-        Classroom classroom = new Classroom();
+        /*Classroom classroom = new Classroom();
         classroom.setName(application.getClassroom());
         classroom.setState("已借出");
-        classroomService.updateClassroomState(classroom);
+        classroomService.updateClassroomState(classroom);*/
+        /*User user = new User();
+        user.setName("敬丽丽");
+        user.setYiban_id("8362339");
+        userService.addUser(user);*/
         return "student";
     }
 

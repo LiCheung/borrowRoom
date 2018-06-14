@@ -13,4 +13,8 @@ public interface UserMapper {
     void updateUserRole(User user);
 
     void beManager(User user);
+
+    String getRoleByName(String username);
+
+    User selectByYBId(String yiban_id);
 }

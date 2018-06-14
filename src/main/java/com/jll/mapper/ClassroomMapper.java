@@ -14,5 +14,5 @@ public interface ClassroomMapper {
 
     List<Classroom> getClassroomList();
 
-    void updateClassroomState(Classroom classroom);
+    /*void updateClassroomState(Classroom classroom);*/
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements UserMapper {
     @Autowired
-    private UserService usersMapper;
+    private UserMapper usersMapper;
 
     @Override
     public void addUser(User user) {
@@ -26,5 +26,16 @@ public class UserService implements UserMapper {
     @Override
     public void beManager(User user) {
         usersMapper.beManager(user);
+    }
+
+    @Override
+    public String getRoleByName(String username) {
+        return usersMapper.getRoleByName(username);
+    }
+
+    @Override
+    public User selectByYBId(String yiban_id) {
+        System.out.println(yiban_id);
+        return usersMapper.selectByYBId(yiban_id);
     }
 }

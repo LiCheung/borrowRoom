@@ -4,26 +4,29 @@
 <mapper namespace="com.jll.mapper.ClassroomMapper">
     <resultMap id="classroomMap" type="com.jll.entity.Classroom">
         <id property="id" column="id"/>
-        <result property="name" column="name"/>
-        <result property="state" column="state"/>
+        <result property="building" column="building"/>
+        <result property="area" column="area"/>
+        <result property="floor" column="floor"/>
+        <result property="room" column="room"/>
     </resultMap>
 
     <insert id="addClassroom" parameterType="com.jll.entity.Classroom">
-        INSERT INTO classroom (name)
-        VALUES (#{name});
+        INSERT INTO classroom (building,area,floor,room)
+        VALUES (#{building},#{area},#{floor},#{room});
         <selectKey keyProperty="id" order="AFTER" resultType="int">
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
 
     <select id="getClassroomList" resultMap="classroomMap">
-        select * from classroom;
+        select * from classroom
+        WHERE building=#{building} AND area=#{area} AND floor=#{floor};
     </select>
 
-    <update id="updateClassroomState" parameterType="com.jll.entity.Classroom">
+    <!--<update id="updateClassroomState" parameterType="com.jll.entity.Classroom">
         UPDATE classroom SET state = #{state}
         WHERE name = #{name};
-    </update>
+    </update>-->
 
     <!--<select id="getDayOffList" resultMap="dayoffMap">
         select * from dayoff;
