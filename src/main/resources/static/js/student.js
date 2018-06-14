@@ -1,11 +1,11 @@
 /**
  * Created by luqingying on 2018/5/17.
  */
-$("#jiaoshishenqin").hide();
-$("#result-table").hide();
+/*$("#jiaoshishenqin").hide();
+$("#result-table").hide();*/
 
-$(document).ready(function() {
-    $("#apply").click(function () {
+$(function() {
+  /*  $("#apply").click(function () {
         $("#jiaoshishenqin").hide();
         $("#result-table").hide();
         $("#zhaojiaoshi").show();
@@ -15,7 +15,7 @@ $(document).ready(function() {
         $("#jiaoshishenqin").hide();
         $("#zhaojiaoshi").hide();
         $("#result-table").show();
-    });
+    });*/
 
    /* $("#search_btn").click(function () {
         var teach_build = $("#teach_build").val();
@@ -36,17 +36,17 @@ $(document).ready(function() {
             code = code + "<div class='col-sm-2 col-xs-6'><a href='#'><div class='classroom'>"+ teach_build + area + floor + r +"</div></a></div>";
         }
         $("#classrooms").html(code);*/
-
+    /*教室搜索*/
     $("#search_btn").click(function () {
         var teach_build = $("#teach_build").val();
         var area = $("#area").val();
         var floor = $("#floor").val();
         $.ajax({
             url: "/getClassroomList",
-            type: "GET",
+            type: "POST",
             data:
                 {
-                    "teaching-buildign" : teach_build,
+                    "teaching-building" : teach_build,
                     "area" : area,
                     "floor" : floor
                 },
@@ -59,6 +59,36 @@ $(document).ready(function() {
             }
         });
     });
+    /*、、教室搜索*/
+
+/*教室借用情况*/
+    $("#classrooms .classroom").click(function () {
+        var rooms = $(".classroom").html();
+        $("#borrow-situation caption").html(rooms + "教室使用情况");
+        $.ajax({
+            url: "",
+            type: "POST",
+            data:
+                {
+                    "room" : rooms
+                },
+            success: function (result) {
+                $("#borrow-situation tbody").empty();
+                $.each(result, function (index, item) {
+                    var room =  teach_build + area + floor + item.room ;
+                    $("#classrooms").append("<div class='col-sm-2 col-xs-6'><a href='#'><div class='classroom'>"+ room +"</div></a></div>");
+                });
+            }
+        });
+        room_num = $(this).html();
+        $("#zhaojiaoshi").hide();
+        $("#jiaoshishenqin").show();
+        $("#apply-classroom").html(room_num);
+    });
+    /*、、、教室借用情况*/
+
+
+
 
    /* function rooms() {
         return 5;
@@ -71,12 +101,7 @@ $(document).ready(function() {
         return i;
     }
 
-    $("#classrooms .classroom").click(function () {
-        room_num = $(this).html();
-        $("#zhaojiaoshi").hide();
-        $("#jiaoshishenqin").show();
-        $("#apply-classroom").html(room_num);
-    });
+
 
     $("#return").click(function () {
         $("#jiaoshishenqin").hide();
