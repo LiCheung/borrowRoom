@@ -170,31 +170,7 @@ h1,h2,h3 {
 .navbar-toggle .icon-bar {
 	background-color: #fff;
 }
-/*
-.btn-primary,.label-primary,.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus  {
-	background-color:#3B5999;
-    color:#fffffe;
-}
-.btn-default {
-    color:#666666;
-    text-shadow:0 0 1px rgba(0,0,0,.3);
-}*/
 
-
-/*.panel textarea, .well textarea, textarea.form-control
-{
-   resize: none;
-}*/
-  
-.badge{
-   color:#3B5999;
-   background-color:#fff;
-}
-.badge:hover, .badge-inverse{
-   background-color:#3B5999;
-   color:#fff;
-}
-    
 .jumbotron {
   background-color:transparent;
 }
@@ -296,4 +272,10 @@ small.text-muted {
 }
 .active{
     background-color: #393939;
+}
+caption{
+    font-size: 22px;
+}
+h1{
+    text-align: center;
 }
