@@ -11,18 +11,17 @@
         <result property="classroom" column="classroom"/>
         <result property="count" column="count"/>
         <result property="reason" column="reason"/>
-        <result property="week_num" column="week_num"/>
-        <result property="week" column="week"/>
-        <result property="class_start" column="class_start"/>
-        <result property="class_end" column="class_end"/>
+        <result property="apply_date" column="apply_date"/>
+        <result property="time_start" column="time_start"/>
+        <result property="time_end" column="time_end"/>
         <result property="state" column="state"/>
         <result property="date" column="date"/>
         <result property="application_name" column="application_name"/>
     </resultMap>
 
     <insert id="insertApplication" parameterType="com.jll.entity.Application">
-        INSERT INTO application (faculty,teacher,phone,participant,classroom,count,reason,week_num,week,class_start,class_end,date)
-        VALUES (#{faculty},#{teacher},#{phone},#{participant},#{classroom},#{count},#{reason},#{week_num},#{week},#{class_start},#{class_end},#{date});
+        INSERT INTO application (faculty,teacher,phone,participant,classroom,count,reason,apply_date,time_start,time_end,date)
+        VALUES (#{faculty},#{teacher},#{phone},#{participant},#{classroom},#{count},#{reason},#{apply_date},#{time_start},#{time_end},#{date});
         <selectKey keyProperty="id" order="AFTER" resultType="int">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -34,7 +33,7 @@
 
     <select id="getApplicationListByRoom" resultMap="applicationMap">
         select * from application
-        WHERE classroom = #{classroom};
+        WHERE classroom = #{room};
     </select>
 
     <update id="updateApplicationState" parameterType="com.jll.entity.Application">

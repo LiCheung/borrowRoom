@@ -34,9 +34,10 @@ public class StudentController {
         Date date = new Date();
         System.out.println(date);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(dateFormat.format(date));
+        String str = dateFormat.format(date);
+        System.out.println(str);
 
-        application.setDate(new java.sql.Date(date.getTime()));
+        application.setDate(str);
         System.out.println(application.getDate());
         applicationService.insertApplication(application);
 
@@ -67,8 +68,10 @@ public class StudentController {
 
     @RequestMapping("/getApplicationListByRoom")
     @ResponseBody
-    public List<Application> getApplicationListByRoom(Classroom classroom){
-        String room = classroom.getBuilding() + classroom.getArea() + classroom.getFloor() + classroom.getRoom();
+    public List<Application> getApplicationListByRoom(String room){
+        System.out.println(room);
+        room = "明理楼A101";
+        System.out.println(room);
         return applicationService.getApplicationListByRoom(room);
     }
 }

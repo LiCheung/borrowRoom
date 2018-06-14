@@ -22,6 +22,11 @@ public class ClassroomService implements ClassroomMapper {
     }
 
     @Override
+    public void deleteClassroom(Classroom classroom) {
+        classroomMapper.deleteClassroom(classroom);
+    }
+
+    @Override
     public List<Classroom> getClassroomList(Classroom classroom) {
         List<Classroom> classrooms = classroomMapper.getClassroomList(classroom);
         return classrooms;

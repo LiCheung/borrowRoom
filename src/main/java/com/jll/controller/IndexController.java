@@ -2,6 +2,8 @@ package com.jll.controller;
 
 import cn.yiban.open.Authorize;
 import com.jll.entity.User;
+import com.jll.entity.YBUser;
+import com.jll.mapper.UserMapper;
 import com.jll.service.UserService;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
@@ -23,6 +25,9 @@ import java.io.IOException;
 @Controller
 public class IndexController {
     private Logger logger = LoggerFactory.getLogger(IndexController.class);
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     AuthController authController;
@@ -67,10 +72,16 @@ public class IndexController {
             return "redirect:/auth1";
         }
 
+        YBUser ybUser = authController.getUserInfo(token);
+        User user = userService.selectByYBId(ybUser.getUserId());
+        System.out.println(user.getRole());
+        System.out.println(user.getRole().equals("管理员"));
+        if(user.getRole().equals("管理员")){
+            return "teacher";
+        }
         /*String username = "敬丽丽";
         request.getSession().setAttribute("username",username);
-        model.addAttribute("username",username);
-        model.addAttribute("role",usersService.getRoleByName(username));*/
+        model.addAttribute("username",username);*/
         return "student";
     }
 

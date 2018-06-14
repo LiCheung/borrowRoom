@@ -23,6 +23,10 @@
         WHERE building=#{building} AND area=#{area} AND floor=#{floor};
     </select>
 
+    <delete id="deleteClassroomList" parameterType="com.jll.entity.Classroom">
+        delete * from classroom
+        WHERE building=#{building} AND area=#{area} AND floor=#{floor} AND room=#{room};
+    </delete>
     <!--<update id="updateClassroomState" parameterType="com.jll.entity.Classroom">
         UPDATE classroom SET state = #{state}
         WHERE name = #{name};

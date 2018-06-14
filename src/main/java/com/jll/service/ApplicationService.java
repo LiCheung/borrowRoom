@@ -34,6 +34,7 @@ public class ApplicationService implements ApplicationMapper {
 
     @Override
     public List<Application> getApplicationListByRoom(String room) {
+        /*System.out.println();*/
         return applicationMapper.getApplicationListByRoom(room);
     }
 }

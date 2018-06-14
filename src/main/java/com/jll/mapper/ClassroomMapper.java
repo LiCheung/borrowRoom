@@ -13,6 +13,8 @@ import java.util.List;
 public interface ClassroomMapper {
     void addClassroom(Classroom classroom);
 
+    void deleteClassroom(Classroom classroom);
+
     List<Classroom> getClassroomList(Classroom classroom);
 
     /*void updateClassroomState(Classroom classroom);*/

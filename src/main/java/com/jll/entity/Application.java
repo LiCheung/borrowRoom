@@ -21,7 +21,8 @@ public class Application {
      private String week;
      private String class_start;
      private String class_end;
-     private Date date;
+     private String state;
+     private String date;
 
      private String application_name;
 }
