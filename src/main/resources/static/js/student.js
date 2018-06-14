@@ -51,6 +51,7 @@ $(document).ready(function() {
                     "floor" : floor
                 },
             success: function (result) {
+                $("#classrooms").empty();
                 $.each(result, function (index, item) {
                     var room =  teach_build + area + floor + item.room ;
                     $("#classrooms").append("<div class='col-sm-2 col-xs-6'><a href='#'><div class='classroom'>"+ room +"</div></a></div>");
