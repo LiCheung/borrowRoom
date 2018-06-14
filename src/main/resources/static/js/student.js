@@ -54,7 +54,7 @@ $(document).ready(function() {
                 $.each(result.data, function (index, item) {
                     var r = item.room.val();
                     var room =  teach_build + area + floor + r ;
-                    $("#classrooms").find(".classroom").eq(index-1).html(room);
+                    $("#classrooms").append("<div class='col-sm-2 col-xs-6'><a href='#'><div class='classroom'>"+ room +"</div></a></div>");
                 });
             }
         });
