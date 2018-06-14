@@ -4,3 +4,7 @@
 .approved{
     color: darkgreen;
 }
+#classrooms .glyphicon{
+    position: relative;
+    top:20px;
+}

@@ -279,3 +279,15 @@ caption{
 h1{
     text-align: center;
 }
+#classrooms .col-sm-2{
+    margin-bottom: 15px;
+}
+
+#classrooms .classroom{
+    height: 150px;
+    width: 150px;
+    text-align: center;
+    line-height: 150px;
+    border: 1px lightgray solid;
+    background-color: lightgray;
+}

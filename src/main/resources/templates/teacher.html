@@ -41,11 +41,24 @@
                             <i class="glyphicon glyphicon-time"></i>申请列表<span id="approving-num" class="badge pull-right">1</span>
                         </a>
                     </li>
-                    <li id="add">
+
+                    <li id="add" data-toggle="collapse" data-target=".setting">
                         <a href="#" >
-                            <i class="glyphicon glyphicon-time"></i>管理教室
+                            <i class="glyphicon glyphicon-cog"></i>管理教室
                         </a>
                     </li>
+                    <ul class="collapse setting nav">
+                        <li>
+                            <a href="#">
+                                <i class="glyphicon"></i>添加
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="glyphicon"></i>查询、删除教室
+                            </a>
+                        </li>
+                    </ul>
                     <li >
                         <a href="#">
                             <i class="glyphicon glyphicon-log-out"></i>退出登录
@@ -61,7 +74,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <!--找教室-->
-                            <!--<div id="zhaojiaoshi">
+                            <div id="zhaojiaoshi">
                                 <div id="search">
                                     <div class="form-group col-sm-3">
                                         <select id="teach_build" class="form-control" >
@@ -91,152 +104,67 @@
                                 </div>
                                 <div id="classrooms">
                                     <div class="col-sm-2 col-xs-6">
-                                        <a href="#"><div class="classroom">明理楼A101</div></a>
+                                        <a href="#"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                                        <a href="#">
+                                            <div class="classroom">
+                                                明理楼A101
+                                            </div>
+                                        </a>
                                     </div>
                                     <div class="col-sm-2 col-xs-6">
+                                        <a href="#"><span class="glyphicon glyphicon-remove-sign"></span></a>
                                         <a href="#"><div class="classroom">明理楼A102</div></a>
                                     </div>
                                     <div class="col-sm-2 col-xs-6">
+                                        <a href="#"><span class="glyphicon glyphicon-remove-sign"></span></a>
                                         <a href="#"><div class="classroom">明理楼A103</div></a>
                                     </div>
                                     <div class="col-sm-2 col-xs-6">
+                                        <a href="#"><span class="glyphicon glyphicon-remove-sign"></span></a>
                                         <a href="#"><div class="classroom">明理楼A104</div></a>
                                     </div>
                                     <div class="col-sm-2 col-xs-6">
+                                        <a href="#"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                                        <a href="#"><div class="classroom">明理楼A105</div></a>
+                                    </div>
+                                    <div class="col-sm-2 col-xs-6">
+                                        <a href="#"><span class="glyphicon glyphicon-remove-sign"></span></a>
                                         <a href="#"><div class="classroom">明理楼A105</div></a>
                                     </div>
                                 </div>
-                            </div>-->
-                            <!--/找教室-->
-                            <!--教室申请表-->
-                            <!--<form id="jiaoshishenqin" class="form-horizontal" role="form">
-                                &lt;!&ndash;<div class="form-group">
-                                    <label class="col-sm-2 control-label">Email</label>
-                                    <div class="col-sm-10">
-                                        <p class="form-control-static">email@example.com</p>
+                            </div>
+
+                            <div>
+                                <form id="jiaoshishenqin" class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="teaching-building" class="col-sm-2 control-label">教学楼</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="teaching-building" placeholder="请输入教学楼">
+                                        </div>
                                     </div>
-                                </div>&ndash;&gt;
-                                <h1>西南石油大学教室借用申请表</h1>
-                                <div class="form-group">
-                                    <label for="unit" class="col-sm-2 control-label">申请单位</label>
-                                    <div class="col-sm-4">
-                                        <input type="txt" class="form-control" id="unit" placeholder="请输入申请单位">
+                                    <div class="form-group">
+                                        <label for="building-area" class="col-sm-2 control-label">教学楼区域</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="building-area" placeholder="请输入教学楼区域">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="teacher" class="col-sm-2 control-label">负责老师</label>
-                                    <div class="col-sm-4">
-                                        <input type="txt" class="form-control" id="teacher" placeholder="请输入负责老师">
+                                    <div class="form-group">
+                                        <label for="floors" class="col-sm-2 control-label">楼层</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="floors" placeholder="请输入楼层">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tel" class="col-sm-2 control-label">联系电话</label>
-                                    <div class="col-sm-4">
-                                        <input type="txt" class="form-control" id="tel" placeholder="请输入联系电话">
+                                    <div class="form-group">
+                                        <label for="attendee" class="col-sm-2 control-label">房间号</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="attendee" placeholder="请输入房间号 例：01">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="attendee" class="col-sm-2 control-label">参加人员</label>
-                                    <div class="col-sm-4">
-                                        <input type="txt" class="form-control" id="attendee" placeholder="请输入参加人员">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="numbers" class="col-sm-2 control-label">人数</label>
-                                    <div class="col-sm-4">
-                                        <input type="txt" class="form-control" id="numbers" placeholder="请输入联系电话">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label  class="col-sm-2 control-label">申请教室</label>
-                                    <div class="col-sm-4">
-                                        <p class="form-control-static" id="apply-classroom"></p>
-                                    </div>
-                                </div>
-                                &lt;!&ndash;教室类型&ndash;&gt;
-                                &lt;!&ndash; <div class="form-group">
-                                     <label for="numbers" class="col-sm-2 control-label">教室类型</label>
-                                     <div class="col-sm-2">
-                                         <div class="radio">
-                                             <label>
-                                                 <input type="radio" name="jiaoshileixing" value="option1" checked> 普通教室
-                                             </label>
-                                         </div>
-                                     </div>
-                                     <div class="col-sm-2">
-                                         <div class="radio">
-                                             <label>
-                                                 <input type="radio" name="jiaoshileixing" value="option2">多功能教室
-                                             </label>
-                                         </div>
-                                     </div>
-                                 </div>&ndash;&gt;
-                                &lt;!&ndash;/教室类型&ndash;&gt;
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2">借用教室事由</label>
-                                    <textarea id="reason" class="form-control" rows="3"></textarea>
-                                </div>
-                                &lt;!&ndash;借用时间&ndash;&gt;
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">借用时间</label>
-                                    <div class="col-md-2 col-sm-5">
-                                        <select id="week_numm" class="form-control">
-                                            <option>第1周</option>
-                                            <option>第2周</option>
-                                            <option>第3周</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 col-sm-5">
-                                        <select class="form-control" id="week">
-                                            <option>周一</option>
-                                            <option>周二</option>
-                                            <option>周三</option>
-                                            <option>周四</option>
-                                            <option>周五</option>
-                                            <option>周六</option>
-                                            <option>周日</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 col-sm-5 col-xs-5">
-                                        <select class="form-control" id="class_start">
-                                            <option>第1节</option>
-                                            <option>第2节</option>
-                                            <option>第3节</option>
-                                            <option>第4节</option>
-                                            <option>第5节</option>
-                                            <option>第6节</option>
-                                            <option>第7节</option>
-                                            <option>第8节</option>
-                                            <option>第9节</option>
-                                            <option>第10节</option>
-                                            <option>第11节</option>
-                                            <option>第12节</option>
-                                        </select>
-                                    </div>
-                                    <label class="col-sm-1 col-xs-1 control-label">到</label>
-                                    <div class="col-md-2 col-sm-5 col-xs-5">
-                                        <select class="form-control" id="class_end">
-                                            <option>第1节</option>
-                                            <option>第2节</option>
-                                            <option>第3节</option>
-                                            <option>第4节</option>
-                                            <option>第5节</option>
-                                            <option>第6节</option>
-                                            <option>第7节</option>
-                                            <option>第8节</option>
-                                            <option>第9节</option>
-                                            <option>第10节</option>
-                                            <option>第11节</option>
-                                            <option>第12节</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                &lt;!&ndash;/借用时间&ndash;&gt;
-                                <button type="button" id="return" class="col-sm-offset-2 btn btn-default">返回</button>
-                                <button type="submit" id="submit" class="btn btn-default">提交</button>
-                            </form>-->
-                            <!--/教室申请表-->
-                            <!--申请结果-->
+                                    <button type="reset" id="return" class="col-sm-offset-2 btn btn-default">取消</button>
+                                    <button type="submit" id="submit" class="btn btn-default">添加</button>
+                                </form>
+                            </div>
+
                             <table id="result-table"  class="table table-hover">
                                 <caption>申请教室列表</caption>
                                 <thead>
