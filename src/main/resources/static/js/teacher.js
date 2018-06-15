@@ -30,6 +30,7 @@ $(document).ready(function() {
         $("#result").addClass("active");
         $("#add_room").removeClass("active");
         $("#search_room").removeClass("active");
+        var unauditedCount;
         $.ajax({
             url: "/getApplicationList",
             type: "POST",
@@ -38,7 +39,7 @@ $(document).ready(function() {
                 $.each(result, function (index, item) {
                     resultsId[index] = item.id;
                     if(item.state == "已通过"){
-                        $(".result-table-tr").eq(index).html("<td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td class='approved'>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td>").show();
+                        $(".result-table-tr").eq(index).html("<td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td class='approved'>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td>").show();unauditedCount++;
                     }
                     else if(item.state == "未通过"){
                         $(".result-table-tr").eq(index).html("<td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td class='approving'>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td>").show();
@@ -46,6 +47,7 @@ $(document).ready(function() {
                     else{
                         $(".result-table-tr").eq(index).html("<td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td>").show();
                     }
+                    $("#approving-num").html(unauditedCount);
                 });
             }
         });
