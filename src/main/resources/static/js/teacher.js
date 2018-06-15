@@ -1,11 +1,14 @@
 /**
  * Created by luqingying on 2018/5/20.
  */
-$("#jiaoshishenqin").hide();
+$("#add-room-form").hide();
 $("#zhaojiaoshi").hide();
 $("#application-content").hide();
 $("#result-table").hide();
 $(".rooms").hide();
+/*$(".result-table-tr").hide();*/
+var applyContentId;
+var resultsId = new Array();
 
 $(document).ready(function() {
     $.ajax({
@@ -19,6 +22,11 @@ $(document).ready(function() {
     /*申请列表点击*/
     $("#result").click(function () {
         $("#result-table").show();
+        $("#jiaoshishenqin").hide();
+        $("#zhaojiaoshi").hide();
+        $("#application-content").hide();
+        $(".rooms").hide();
+        $(".result-table-tr").hide();
         $("#result").addClass("active");
         $("#add_room").removeChild("active");
         $("#search_room").removeChild("active");
@@ -28,29 +36,32 @@ $(document).ready(function() {
             success: function (result) {
                 $("#result-table tbody").empty();
                 $.each(result, function (index, item) {
+                    resultsId[index] = item.id;
                     if(item.state == "已通过"){
-                    $("#result-table tbody").append("<tr id='result-table-tr"+ item.id +"' class='result-table-tr'><td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td class='approved'>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td></tr>");
+                        $(".result-table-tr").eq(index).show().html("<td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td class='approved'>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td>");
                     }
                     else if(item.state == "未通过"){
-                        $("#result-table tbody").append("<tr id='result-table-tr"+ item.id +"' class='result-table-tr'><td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td class='approving'>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td></tr>");
+                        $(".result-table-tr").eq(index).show().html("<td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td class='approving'>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td>");
                     }
                     else{
-                        $("#result-table tbody").append("<tr id='result-table-tr"+ item.id +"' class='result-table-tr'><td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td></tr>");
+                        $(".result-table-tr").eq(index).show().html("<td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td>");
                     }
                 });
             }
         });
     })
 
-
-
+/*申请列表某一行点击*/
     $(".result-table-tr").click(function () {
         $("#application-content").show();
-        $("#jiaoshishenqin").hide();
+        $("#add-room-form").hide();
         $("#zhaojiaoshi").hide();
         $("#result-table").hide();
         $(".rooms").hide();
-        var id = $(this).attr("id").split("result-table-tr")
+        $("#agree").attr('disabled',false);
+        $("#refuse").attr('disabled',false);
+        var index = $(this).parent().children().index(this);
+        var id = resultsId[index];
         $.ajax({
             url: "/",
             type: "POST",
@@ -67,16 +78,57 @@ $(document).ready(function() {
                     $("#reason").val(item.reason);
                     $("#date").val(item.date);
                     $("borrow-time").val(item.time_start + "到" +item.time_end);
+                    applyContentId = item.id;
                 });
             }
         });
     })
 
-    
+
+    $("#agree").click(function () {
+        $("#refuse").attr('disabled',true);
+        $.ajax({
+            url: "/",
+            type: "POST",
+            data:{
+                "id" : applyContentId,
+                "state": 已通过
+            },
+            success: function (result) {
+              alert("该申请已同意");
+            }
+        });
+    })
+    $("#refuse").click(function () {
+        $("#agree").attr('disabled',true);
+        $.ajax({
+            url: "/",
+            type: "POST",
+            data:{
+                "id" : applyContentId,
+                "state": 未通过
+            },
+            success: function (result) {
+                alert("该申请未同意");
+            }
+        });
+    })
+
+    /*添加点击*/
+    $("#add_room").click(function () {
+        $("#result-table").hide();
+        $("#add-room-form").show();
+        $("#zhaojiaoshi").hide();
+        $("#application-content").hide();
+        $(".rooms").hide();
+        $("#add_room").addClass("active");
+        $("#result").removeClass("active");
+        $("#search_room").removeClass("active");
+    })
 
     $("#search_btn").click(function () {
         $("#zhaojiaoshi").show();
-        $("#jiaoshishenqin").hide();
+        $("#add-room-form").hide();
         $("#result-table").hide();
         $("#borrow-situation").hide();
         $(".classroom").empty();
