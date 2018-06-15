@@ -34,7 +34,12 @@
         WHERE classroom = #{room};
     </select>
 
-    <select id="getApplicationListById" resultMap="applicationMap">
+    <select id="getApplicationListById" resultType="com.jll.entity.Application">
+        select * from application
+        WHERE id= #{id};
+    </select>
+
+    <select id="getApplicationListByApplicator" resultMap="applicationMap">
         select * from application
         WHERE application_id= #{application_id};
     </select>
@@ -43,6 +48,11 @@
         UPDATE application SET state = #{state}
         WHERE id = #{id};
     </update>
+
+    <delete id="deleteApplication" parameterType="com.jll.entity.Application">
+        delete * from application
+        WHERE id = #{id};
+    </delete>
     <!--<select id="getDayOffList" resultMap="dayoffM
      ap">
         select * from dayoff;

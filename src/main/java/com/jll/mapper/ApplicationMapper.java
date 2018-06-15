@@ -18,5 +18,9 @@ public interface ApplicationMapper {
 
     List<Application> getApplicationListByRoom(String room);
 
-    List<Application> getApplicationListById(String id);
+    List<Application> getApplicationListByApplicator(String application_id);
+
+    Application getApplicationListById(Integer id);
+
+    void deleteApplication(Application application);
 }

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,12 +42,9 @@ public class StudentController {
         YBUser ybUser = authController.getUserInfo(token);
         application.setApplication_id(ybUser.getUserId());
 
-        /*Date date = new Date();
-        System.out.println(date);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        application.setDate(dateFormat.parse(dateFormat.format(date)));
-        System.out.println(application.getDate());*/
+        Date date = new Date();
+        application.setDate(dateFormat.format(date));
         applicationService.insertApplication(application);
 
         /*Classroom classroom = new Classroom();
@@ -80,15 +79,28 @@ public class StudentController {
     @ResponseBody
     public List<Application> getApplicationListByRoom(String room){
         System.out.println(room);
-        return applicationService.getApplicationListByRoom(room);
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        List<Application> applicationList = applicationService.getApplicationListByRoom(room);
+        List<Application> applications = new ArrayList<>();
+        for(Application application:applicationList){
+            try {
+                //使用SimpleDateFormat的parse()方法生成Date
+                if(sf.parse(application.getTime_end()).after(new Date())){
+                    applications.add(application);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return applications;
     }
 
     //已完成
-    @RequestMapping("/getApplicationListById")
+    @RequestMapping("/getApplicationListByApplicator")
     @ResponseBody
-    public List<Application> getApplicationListById(HttpServletRequest request){
+    public List<Application> getApplicationListByApplicator(HttpServletRequest request){
         String token = (String) request.getSession().getAttribute("token");
         YBUser ybUser = authController.getUserInfo(token);
-        return applicationService.getApplicationListById(ybUser.getUserId());
+        return applicationService.getApplicationListByApplicator(ybUser.getUserId());
     }
 }

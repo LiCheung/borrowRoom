@@ -34,20 +34,33 @@ public class TeacherController {
     }
 
     @RequestMapping("/deleteClassroom")
-    public String deleteClassroom(Classroom classroom){
+    public void deleteClassroom(Classroom classroom){
         classroomService.deleteClassroom(classroom);
-        return "teacher";
     }
 
     @RequestMapping("/getApplicationList")
     @ResponseBody
     public List<Application> getApplicationList(){
+        System.out.println(applicationService.getApplicationList());
         return applicationService.getApplicationList();
+    }
+
+    @RequestMapping("/getApplicationListById")
+    @ResponseBody
+    public Application getApplicationListById(Integer id){
+        System.out.println(applicationService.getApplicationListById(id));
+        return applicationService.getApplicationListById(id);
     }
 
     @RequestMapping("/updateApplicationState")
     public String updateApplicationState(Application application){
         applicationService.updateApplicationState(application);
+        return "teacher";
+    }
+
+    @RequestMapping("/deleteApplication")
+    public String deleteApplication(Application application){
+        applicationService.deleteApplication(application);
         return "teacher";
     }
 }

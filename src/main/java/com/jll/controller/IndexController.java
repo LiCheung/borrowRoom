@@ -36,28 +36,6 @@ public class IndexController {
     private String  APP_SECRET = "53b5ca41fea90828411ce5123181250d";
     private String REDIRECT_URI = "http://localhost:7070/index";
 
-    /*@RequestMapping("/index")
-    public String view(HttpServletRequest request){
-        System.out.println("yeah");
-        *//*User user = new User();
-        usersService.addUser(user);*//*
-        String token = (String) request.getSession().getAttribute("token");
-//        如果没有token，则重定向到auth获取易班token
-        if(token == null || token.isEmpty()){
-            return "redirect:/auth1";
-        }
-        Authorize authorize = new Authorize(APP_ID, APP_SECRET);
-        boolean tokenTime = authController.isAuth(token);
-        if(!tokenTime){
-            return "redirect:/auth1";
-        }
-        model.addAttribute("username",request.getSession().getAttribute("username"));
-        System.out.println("session过期设置时间："+ request.getSession().getMaxInactiveInterval());
-
-        System.out.println("username is " + request.getSession().getAttribute("username"));
-        return "student";
-    }*/
-
     @GetMapping("/")
     public String index(HttpServletRequest request, Model model){
         String token = (String) request.getSession().getAttribute("token");
@@ -73,6 +51,7 @@ public class IndexController {
         }
 
         YBUser ybUser = authController.getUserInfo(token);
+        model.addAttribute("username",ybUser.getUsername());
         User user = userService.selectByYBId(ybUser.getUserId());
         System.out.println(user.getRole());
         System.out.println(user.getRole().equals("管理员"));
