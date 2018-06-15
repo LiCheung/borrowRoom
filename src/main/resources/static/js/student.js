@@ -2,9 +2,17 @@
  * Created by luqingying on 2018/5/17.
  */
 /*$("#jiaoshishenqin").hide();
-$("#result-table").hide();*/
+$("#result-table").hide();
+$("#borrow-situation").hide();*/
 
 $(function() {
+    $.ajax({
+        url: "",
+        type: "POST",
+        success: function (result) {
+            $("id-name").html(result.name + "(" + result.id + ")");
+        }
+    });
   /*  $("#apply").click(function () {
         $("#jiaoshishenqin").hide();
         $("#result-table").hide();
@@ -38,6 +46,10 @@ $(function() {
         $("#classrooms").html(code);*/
     /*教室搜索*/
     $("#search_btn").click(function () {
+        $("#zhaojiaoshi").show();
+        $("#jiaoshishenqin").hide();
+        $("#result-table").hide();
+        $("#borrow-situation").hide();
         var teach_build = $("#teach_build").val();
         var area = $("#area").val();
         var floor = $("#floor").val();
@@ -63,6 +75,10 @@ $(function() {
 
 /*教室借用情况*/
     $("#classrooms .classroom").click(function () {
+        $("#zhaojiaoshi").hide();
+        $("#jiaoshishenqin").hide();
+        $("#result-table").hide();
+        $("#borrow-situation").show();
         var rooms = $(".classroom").html();
         $("#borrow-situation caption").html(rooms + "教室使用情况");
         $.ajax({
@@ -75,19 +91,76 @@ $(function() {
             success: function (result) {
                 $("#borrow-situation tbody").empty();
                 $.each(result, function (index, item) {
-                    var room =  teach_build + area + floor + item.room ;
-                    $("#classrooms").append("<div class='col-sm-2 col-xs-6'><a href='#'><div class='classroom'>"+ room +"</div></a></div>");
+                    $("#borrow-situation tbody").append("<tr><td>"+ item.faculty +"</td><td>"+ item.time +"</td></tr>");
                 });
             }
         });
-        room_num = $(this).html();
-        $("#zhaojiaoshi").hide();
-        $("#jiaoshishenqin").show();
-        $("#apply-classroom").html(room_num);
     });
     /*、、、教室借用情况*/
 
+    /*填写申请表按钮点击*/
+    $("#complete-apply-btn").click(function () {
+        $("#zhaojiaoshi").hide();
+        $("#borrow-situation").hide();
+        $("#result-table").hide();
+        $("#jiaoshishenqin").show();
+        $("#apply-classroom").html( $("#borrow-situation caption").html().replace('教室使用情况',''));
+    })
+    /*、、填写申请表按钮点击*/
 
+    /*我的申请点击*/
+    $("#result").click(function () {
+        $("#zhaojiaoshi").hide();
+        $("#jiaoshishenqin").hide();
+        $("#borrow-situation").hide();
+        $("#result-table").show();
+        $.ajax({
+            url: "",
+            type: "POST",
+            success: function (result) {
+                $("#result-table tbody").empty();
+                $.each(result, function (index, item) {
+                    $("#result-table tbody").append("<tr><td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.class_start + "到" + item.class_end + "</td><td>"+ item.state +"</td><td>"+ item.date +"</td></tr>");
+                });
+            }
+        });
+    });
+    /*我的申请点击*/
+
+    $("#submit").click(function () {
+        var unit,teacher,telephone,participant,number,room_apply,reason,apply_date,time_start,time_end;
+        unit = $("#unit").val();
+        teacher = $("#teacher").val();
+        telephone = $("#tel").val();
+        participant = $("#attendee").val();
+        number = $("#numbers").val();
+        room_apply = $("#apply-classroom").html();
+        reason = $("#reason").val();
+        apply_date = $("#year").val() + $("#month").val() + $("#date").val();
+        time_start = $("#start-hour").val() + ":" + $("start-minute").val();
+        time_end =  $("#end-hour").val() + ":" + $("end-minute").val();
+        $.ajax({
+
+            url: "/",
+            type: "POST",
+            data:
+                {
+                    "unit" : unit,
+                    "teacher" : teacher ,
+                    "telephone": telephone,
+                    "participant":participant,
+                    "number":number,
+                    "room_apply":room_apply,
+                    "reason":reason ,
+                    "apply_date":apply_date,
+                    "time_start":time_start,
+                    "time_end":time_end
+                },
+            success: function (result) {
+              alert("提交成功！")
+            }
+        });
+    });
 
 
    /* function rooms() {
@@ -109,20 +182,7 @@ $(function() {
     });
 
 
-    $("#submit").click(function () {
-        $("#apply").removeClass("active");
-        $("#result").addClass("active");
-        var unit,room_apply,use_time,apply_state,apply_time;
-        unit = $("#unit").val();
-        room_apply = room_num;
-        use_time = $("#week_numm").val() + $("#week").val() + $("#class_start").val() + "到" + $("#class_end").val();
-        apply_state = "未审批";
-        apply_time = new Date().toLocaleString( );
-      /*  alert(unit + room_apply + use_time + apply_state + apply_time);*/
-        $("#jiaoshishenqin").hide();
-        $("#result-table").show();
-        $("#result-table tbody").append("<tr> <td>" + unit + "</td> <td>" + room_apply + "</td><td>" + use_time + "</td><td>未审批<button class='btn btn-default cancel'>撤销</button></td><td>" + apply_time + "</td></tr>")
-    });
+
 
     $(".cancel").click(function () {
         if(confirm("确定撤销？")){
