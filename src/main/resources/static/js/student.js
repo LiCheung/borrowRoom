@@ -66,7 +66,7 @@ $(function() {
                 $("#classrooms").empty();
                 $.each(result, function (index, item) {
                     var room =  teach_build + area + floor + item.room ;
-                    $("#classrooms").append("<div class='col-sm-2 col-xs-6' onclick='borrowSituation()'><a href='#'><div class='classroom'>"+ room +"</div></a></div>");
+                    $("#classrooms").append("<div class='col-sm-2 col-xs-6'><a href='#'><div class='classroom'>"+ room +"</div></a></div>");
                 });
             }
         });
@@ -75,29 +75,34 @@ $(function() {
 
 
 /*教室借用情况*/
-   function borrowSituation(){
+   $("#classrooms .classroom").on("click",function () {
+       $("#classrooms .classroom").each(function() {
+           console.log($(this).index());
+       });
        alert("lalal");
-        $("#zhaojiaoshi").hide();
-        $("#jiaoshishenqin").hide();
-        $("#result-table").hide();
-        $("#borrow-situation").show();
-        var rooms = $(".classroom").html();
-        $("#borrow-situation caption").html(rooms + "教室使用情况");
-        $.ajax({
-            url: "/getApplicationListByRoom",
-            type: "POST",
-            data:
-                {
-                    "room" : rooms
-                },
-            success: function (result) {
-                $("#borrow-situation tbody").empty();
-                $.each(result, function (index, item) {
-                    $("#borrow-situation tbody").append("<tr><td>"+ item.faculty +"</td><td>"+ item.time +"</td></tr>");
-                });
-            }
-        });
-    }
+       $("#zhaojiaoshi").hide();
+       $("#jiaoshishenqin").hide();
+       $("#result-table").hide();
+       $("#borrow-situation").show();
+       var rooms = $(".classroom").html();
+       $("#borrow-situation caption").html(rooms + "教室使用情况");
+       $.ajax({
+           url: "/getApplicationListByRoom",
+           type: "POST",
+           data:
+               {
+                   "room" : rooms
+               },
+           success: function (result) {
+               $("#borrow-situation tbody").empty();
+               $.each(result, function (index, item) {
+                   $("#borrow-situation tbody").append("<tr><td>"+ item.faculty +"</td><td>"+ item.time +"</td></tr>");
+               });
+           }
+       });
+   })
+
+
     /*、、、教室借用情况*/
 
 
