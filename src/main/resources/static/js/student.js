@@ -76,9 +76,9 @@ $(function() {
 
 /*教室借用情况*/
    $("#classrooms .classroom").on("click",function () {
-       $("#classrooms .classroom").each(function() {
+     /*  $("#classrooms .classroom").each(function() {
            console.log($(this).index());
-       });
+       });*/
        alert("lalal");
        $("#zhaojiaoshi").hide();
        $("#jiaoshishenqin").hide();
