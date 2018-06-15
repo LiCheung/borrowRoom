@@ -28,10 +28,10 @@ $(document).ready(function() {
         $(".rooms").hide();
         $(".result-table-tr").hide();
         $("#result").addClass("active");
-        $("#add_room").removeChild("active");
-        $("#search_room").removeChild("active");
+        $("#add_room").removeClass("active");
+        $("#search_room").removeClass("active");
         $.ajax({
-            url: "/",
+            url: "/getApplicationList",
             type: "POST",
             success: function (result) {
                 $("#result-table tbody").empty();
@@ -63,12 +63,13 @@ $(document).ready(function() {
         var index = $(this).parent().children().index(this);
         var id = resultsId[index];
         $.ajax({
-            url: "/",
+            url: "/getApplicationListById",
             type: "POST",
             data:{
                 "id" : id
             },
             success: function (result) {
+                alert("ajax");
                 $.each(result, function (index, item) {
                     $("#unit").val(item.faculty);
                     $("#teacher").val(item.teacher);
@@ -79,6 +80,7 @@ $(document).ready(function() {
                     $("#date").val(item.date);
                     $("borrow-time").val(item.time_start + "到" +item.time_end);
                     applyContentId = item.id;
+
                 });
             }
         });

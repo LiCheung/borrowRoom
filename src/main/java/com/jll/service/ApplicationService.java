@@ -39,7 +39,17 @@ public class ApplicationService implements ApplicationMapper {
     }
 
     @Override
-    public List<Application> getApplicationListById(String id) {
+    public List<Application> getApplicationListByApplicator(String application_id) {
+        return applicationMapper.getApplicationListByApplicator(application_id);
+    }
+
+    @Override
+    public Application getApplicationListById(Integer id) {
         return applicationMapper.getApplicationListById(id);
+    }
+
+    @Override
+    public void deleteApplication(Application application) {
+        applicationMapper.deleteApplication(application);
     }
 }

@@ -7,13 +7,13 @@ $("#borrow-situation").hide();
 
 $(".rooms").hide();
 $(function() {
-    $.ajax({
-        url: "",
+    /*$.ajax({
+        url: "/getUserInfo",
         type: "POST",
         success: function (result) {
             $("id-name").html(result.name + "(" + result.id + ")");
         }
-    });
+    });*/
   /*  $("#apply").click(function () {
         $("#jiaoshishenqin").hide();
         $("#result-table").hide();
