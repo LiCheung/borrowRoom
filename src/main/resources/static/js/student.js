@@ -117,12 +117,26 @@ $(function() {
     })
     /*、、填写申请表按钮点击*/
 
+    /*借教室申请点击*/
+    $("#apply").click(function () {
+        $("#zhaojiaoshi").show();
+        $("#jiaoshishenqin").hide();
+        $("#borrow-situation").hide();
+        $("#result-table").hide();
+        $("#result").removeClass("active");
+        $("#apply").addClass("active");
+    })
+
+
+
     /*我的申请点击*/
     $("#result").click(function () {
         $("#zhaojiaoshi").hide();
         $("#jiaoshishenqin").hide();
         $("#borrow-situation").hide();
         $("#result-table").show();
+        $("#apply").removeClass("active");
+        $("#result").addClass("active");
         $.ajax({
             url: "/getApplicationListById",
             type: "POST",
