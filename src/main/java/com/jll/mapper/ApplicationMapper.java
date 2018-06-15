@@ -17,4 +17,6 @@ public interface ApplicationMapper {
     void updateApplicationState(Application application);
 
     List<Application> getApplicationListByRoom(String room);
+
+    List<Application> getApplicationListById(String id);
 }

@@ -3,6 +3,7 @@ package com.jll.controller;
 import com.jll.entity.Application;
 import com.jll.entity.Classroom;
 import com.jll.entity.User;
+import com.jll.entity.YBUser;
 import com.jll.service.ApplicationService;
 import com.jll.service.ClassroomService;
 import com.jll.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +30,9 @@ public class StudentController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AuthController authController;
 
     @RequestMapping("/save")
     public String save(Application application){
@@ -55,6 +60,7 @@ public class StudentController {
     @RequestMapping("/getClassroomList")
     @ResponseBody
     public List<Classroom> getClassroomList(Classroom classroom){
+        System.out.println(classroom);
         List<Classroom> classrooms = classroomService.getClassroomList(classroom);
         System.out.println(classrooms);
         return classrooms;
@@ -73,5 +79,13 @@ public class StudentController {
         room = "明理楼A101";
         System.out.println(room);
         return applicationService.getApplicationListByRoom(room);
+    }
+
+    @RequestMapping("/getApplicationListById")
+    @ResponseBody
+    public List<Application> getApplicationListById(HttpServletRequest request){
+        String token = (String) request.getSession().getAttribute("token");
+        YBUser ybUser = authController.getUserInfo(token);
+        return applicationService.getApplicationListByRoom(ybUser.getUserId());
     }
 }

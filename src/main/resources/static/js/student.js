@@ -58,7 +58,7 @@ $(function() {
             type: "POST",
             data:
                 {
-                    "teaching-building" : teach_build,
+                    "building" : teach_build,
                     "area" : area,
                     "floor" : floor
                 },
@@ -66,15 +66,17 @@ $(function() {
                 $("#classrooms").empty();
                 $.each(result, function (index, item) {
                     var room =  teach_build + area + floor + item.room ;
-                    $("#classrooms").append("<div class='col-sm-2 col-xs-6'><a href='#'><div class='classroom'>"+ room +"</div></a></div>");
+                    $("#classrooms").append("<div class='col-sm-2 col-xs-6' onclick='borrowSituation()'><a href='#'><div class='classroom'>"+ room +"</div></a></div>");
                 });
             }
         });
     });
     /*、、教室搜索*/
 
+
 /*教室借用情况*/
-    $("#classrooms .classroom").click(function () {
+   function borrowSituation(){
+       alert("lalal");
         $("#zhaojiaoshi").hide();
         $("#jiaoshishenqin").hide();
         $("#result-table").hide();
@@ -82,7 +84,7 @@ $(function() {
         var rooms = $(".classroom").html();
         $("#borrow-situation caption").html(rooms + "教室使用情况");
         $.ajax({
-            url: "",
+            url: "/getApplicationListByRoom",
             type: "POST",
             data:
                 {
@@ -95,8 +97,9 @@ $(function() {
                 });
             }
         });
-    });
+    }
     /*、、、教室借用情况*/
+
 
     /*填写申请表按钮点击*/
     $("#complete-apply-btn").click(function () {

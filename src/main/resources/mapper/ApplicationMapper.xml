@@ -16,7 +16,7 @@
         <result property="time_end" column="time_end"/>
         <result property="state" column="state"/>
         <result property="date" column="date"/>
-        <result property="application_name" column="application_name"/>
+        <result property="application_id" column="application_id"/>
     </resultMap>
 
     <insert id="insertApplication" parameterType="com.jll.entity.Application">
@@ -34,6 +34,11 @@
     <select id="getApplicationListByRoom" resultMap="applicationMap">
         select * from application
         WHERE classroom = #{room};
+    </select>
+
+    <select id="getApplicationListById" resultMap="applicationMap">
+        select * from application
+        WHERE application_id= #{application_id};
     </select>
 
     <update id="updateApplicationState" parameterType="com.jll.entity.Application">
