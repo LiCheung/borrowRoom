@@ -291,3 +291,7 @@ h1{
     border: 1px lightgray solid;
     background-color: lightgray;
 }
+.nameinput{
+    background: none;
+    border:none;
+}

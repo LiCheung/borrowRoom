@@ -125,6 +125,7 @@ $(function() {
         $("#result-table").hide();
         $("#result").removeClass("active");
         $("#apply").addClass("active");
+
     })
 
 

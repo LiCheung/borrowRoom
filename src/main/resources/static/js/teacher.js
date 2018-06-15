@@ -34,17 +34,17 @@ $(document).ready(function() {
             url: "/",
             type: "POST",
             success: function (result) {
-                $("#result-table tbody").empty();
+                $(".result-table-tr").empty();
                 $.each(result, function (index, item) {
                     resultsId[index] = item.id;
                     if(item.state == "已通过"){
-                        $(".result-table-tr").eq(index).show().html("<td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td class='approved'>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td>");
+                        $(".result-table-tr").eq(index).html("<td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td class='approved'>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td>").show();
                     }
                     else if(item.state == "未通过"){
-                        $(".result-table-tr").eq(index).show().html("<td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td class='approving'>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td>");
+                        $(".result-table-tr").eq(index).html("<td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td class='approving'>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td>").show();
                     }
                     else{
-                        $(".result-table-tr").eq(index).show().html("<td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td>");
+                        $(".result-table-tr").eq(index).html("<td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td>").show();
                     }
                 });
             }
@@ -114,7 +114,7 @@ $(document).ready(function() {
         });
     })
 
-    /*添加点击*/
+    /*侧边栏的添加点击*/
     $("#add_room").click(function () {
         $("#result-table").hide();
         $("#add-room-form").show();
@@ -125,6 +125,23 @@ $(document).ready(function() {
         $("#result").removeClass("active");
         $("#search_room").removeClass("active");
     })
+
+
+    /*侧边栏的查询
+点击*/
+    $("#search_room").click(function () {
+        $("#result-table").hide();
+        $("#add-room-form").show();
+        $("#zhaojiaoshi").hide();
+        $("#application-content").hide();
+        $(".rooms").hide();
+        $("#add_room").addClass("active");
+        $("#result").removeClass("active");
+        $("#search_room").removeClass("active");
+    })
+
+
+
 
     $("#search_btn").click(function () {
         $("#zhaojiaoshi").show();
