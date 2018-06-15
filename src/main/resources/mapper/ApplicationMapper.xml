@@ -20,8 +20,8 @@
     </resultMap>
 
     <insert id="insertApplication" parameterType="com.jll.entity.Application">
-        INSERT INTO application (faculty,teacher,phone,participant,classroom,count,reason,apply_date,time_start,time_end,date)
-        VALUES (#{faculty},#{teacher},#{phone},#{participant},#{classroom},#{count},#{reason},#{apply_date},#{time_start},#{time_end},#{date});
+        INSERT INTO application (faculty,teacher,phone,participant,classroom,count,reason,time_start,time_end,date,application_id)
+        VALUES (#{faculty},#{teacher},#{phone},#{participant},#{classroom},#{count},#{reason},#{time_start},#{time_end},#{date},#{application_id});
         <selectKey keyProperty="id" order="AFTER" resultType="int">
             SELECT LAST_INSERT_ID()
         </selectKey>

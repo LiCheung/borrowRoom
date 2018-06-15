@@ -17,12 +17,10 @@ public class Application {
      private String classroom;
      private Integer count;
      private String reason;
-     private String week_num;
-     private String week;
-     private String class_start;
-     private String class_end;
+     private String time_start;
+     private String time_end;
+
      private String state;
      private String date;
-
-     private String application_name;
+     private String application_id;
 }

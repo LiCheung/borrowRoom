@@ -1,10 +1,11 @@
 /**
  * Created by luqingying on 2018/5/17.
  */
-/*$("#jiaoshishenqin").hide();
+$("#jiaoshishenqin").hide();
 $("#result-table").hide();
-$("#borrow-situation").hide();*/
+$("#borrow-situation").hide();
 
+$(".rooms").hide();
 $(function() {
     $.ajax({
         url: "",
@@ -50,6 +51,8 @@ $(function() {
         $("#jiaoshishenqin").hide();
         $("#result-table").hide();
         $("#borrow-situation").hide();
+        $(".classroom").empty();
+        $(".rooms").hide();
         var teach_build = $("#teach_build").val();
         var area = $("#area").val();
         var floor = $("#floor").val();
@@ -63,10 +66,12 @@ $(function() {
                     "floor" : floor
                 },
             success: function (result) {
-                $("#classrooms").empty();
+
                 $.each(result, function (index, item) {
                     var room =  teach_build + area + floor + item.room ;
-                    $("#classrooms").append("<div class='col-sm-2 col-xs-6'><a href='#'><div class='classroom'>"+ room +"</div></a></div>");
+                    $(".rooms").eq(index).show();
+                    alert($(".rooms").eq(index).html());
+                    $(".classroom").eq(index).html(room);
                 });
             }
         });
@@ -76,10 +81,6 @@ $(function() {
 
 /*教室借用情况*/
    $("#classrooms .classroom").on("click",function () {
-     /*  $("#classrooms .classroom").each(function() {
-           console.log($(this).index());
-       });*/
-       alert("lalal");
        $("#zhaojiaoshi").hide();
        $("#jiaoshishenqin").hide();
        $("#result-table").hide();
@@ -144,23 +145,20 @@ $(function() {
         number = $("#numbers").val();
         room_apply = $("#apply-classroom").html();
         reason = $("#reason").val();
-        apply_date = $("#year").val() + $("#month").val() + $("#date").val();
-        time_start = $("#start-hour").val() + ":" + $("start-minute").val();
-        time_end =  $("#end-hour").val() + ":" + $("end-minute").val();
+        time_start =$("#year").val() +"-"+ $("#month").val() +"-" + $("#date").val() +" "+ $("#start-hour").val() + ":" + $("start-minute").val() + ":00" ;
+        time_end =  $("#year").val() +"-"+ $("#month").val() +"-" + $("#date").val() +" "+  $("#end-hour").val() + ":" + $("end-minute").val() + ":00";
         $.ajax({
-
-            url: "/",
+            url: "/save",
             type: "POST",
             data:
                 {
-                    "unit" : unit,
+                    "faculty" : unit,
                     "teacher" : teacher ,
-                    "telephone": telephone,
+                    "phone": telephone,
                     "participant":participant,
-                    "number":number,
-                    "room_apply":room_apply,
+                    "count":number,
+                    "classroom":room_apply,
                     "reason":reason ,
-                    "apply_date":apply_date,
                     "time_start":time_start,
                     "time_end":time_end
                 },

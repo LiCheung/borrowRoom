@@ -35,7 +35,10 @@ public class StudentController {
     private AuthController authController;
 
     @RequestMapping("/save")
-    public String save(Application application){
+    public String save(Application application,HttpServletRequest request){
+        String token = (String) request.getSession().getAttribute("token");
+        YBUser ybUser = authController.getUserInfo(token);
+        application.setApplication_id(ybUser.getUserId());
         Date date = new Date();
         System.out.println(date);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
