@@ -50,6 +50,7 @@ $(document).ready(function() {
         $("#zhaojiaoshi").hide();
         $("#result-table").hide();
         $(".rooms").hide();
+        var id = $(this).attr("id").split("result-table-tr")
         $.ajax({
             url: "/",
             type: "POST",
@@ -57,9 +58,15 @@ $(document).ready(function() {
                 "id" : id
             },
             success: function (result) {
-                $("#result-table tbody").empty();
                 $.each(result, function (index, item) {
-                    $("#result-table tbody").append("<tr id='result-table-tr"+ item.id +"' class='result-table-tr'><td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td>"+ item.state +"</td><td>"+ item.date +"</td><td><a href='#'>详情</a></td></tr>");
+                    $("#unit").val(item.faculty);
+                    $("#teacher").val(item.teacher);
+                    $("#tel").val(item.phone);
+                    $("#attendee").val(item.participant);
+                    $("#apply-classroom").html(item.classroom);
+                    $("#reason").val(item.reason);
+                    $("#date").val(item.date);
+                    $("borrow-time").val(item.time_start + "到" +item.time_end);
                 });
             }
         });
