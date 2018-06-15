@@ -11,11 +11,9 @@
         <result property="classroom" column="classroom"/>
         <result property="count" column="count"/>
         <result property="reason" column="reason"/>
-        <result property="apply_date" column="apply_date"/>
         <result property="time_start" column="time_start"/>
         <result property="time_end" column="time_end"/>
         <result property="state" column="state"/>
-        <result property="date" column="date"/>
         <result property="application_id" column="application_id"/>
     </resultMap>
 

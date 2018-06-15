@@ -39,14 +39,13 @@ public class StudentController {
         String token = (String) request.getSession().getAttribute("token");
         YBUser ybUser = authController.getUserInfo(token);
         application.setApplication_id(ybUser.getUserId());
-        Date date = new Date();
+
+        /*Date date = new Date();
         System.out.println(date);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String str = dateFormat.format(date);
-        System.out.println(str);
 
-        application.setDate(str);
-        System.out.println(application.getDate());
+        application.setDate(dateFormat.parse(dateFormat.format(date)));
+        System.out.println(application.getDate());*/
         applicationService.insertApplication(application);
 
         /*Classroom classroom = new Classroom();
@@ -60,6 +59,7 @@ public class StudentController {
         return "student";
     }
 
+    //已完成
     @RequestMapping("/getClassroomList")
     @ResponseBody
     public List<Classroom> getClassroomList(Classroom classroom){
@@ -75,20 +75,20 @@ public class StudentController {
         userService.beManager(user);
     }
 
+    //已完成
     @RequestMapping("/getApplicationListByRoom")
     @ResponseBody
     public List<Application> getApplicationListByRoom(String room){
         System.out.println(room);
-        room = "明理楼A101";
-        System.out.println(room);
         return applicationService.getApplicationListByRoom(room);
     }
 
+    //已完成
     @RequestMapping("/getApplicationListById")
     @ResponseBody
     public List<Application> getApplicationListById(HttpServletRequest request){
         String token = (String) request.getSession().getAttribute("token");
         YBUser ybUser = authController.getUserInfo(token);
-        return applicationService.getApplicationListByRoom(ybUser.getUserId());
+        return applicationService.getApplicationListById(ybUser.getUserId());
     }
 }

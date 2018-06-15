@@ -21,6 +21,6 @@ public class Application {
      private String time_end;
 
      private String state;
-     private String date;
+     private Date date;
      private String application_id;
 }

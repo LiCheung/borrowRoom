@@ -124,12 +124,12 @@ $(function() {
         $("#borrow-situation").hide();
         $("#result-table").show();
         $.ajax({
-            url: "",
+            url: "/getApplicationListById",
             type: "POST",
             success: function (result) {
                 $("#result-table tbody").empty();
                 $.each(result, function (index, item) {
-                    $("#result-table tbody").append("<tr><td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.class_start + "到" + item.class_end + "</td><td>"+ item.state +"</td><td>"+ item.date +"</td></tr>");
+                    $("#result-table tbody").append("<tr><td>" + item.faculty + "</td><td>" + item.classroom + "</td><td>" + item.time_start + "到" + item.time_end + "</td><td>"+ item.state +"</td><td>"+ item.date +"</td></tr>");
                 });
             }
         });
@@ -145,8 +145,8 @@ $(function() {
         number = $("#numbers").val();
         room_apply = $("#apply-classroom").html();
         reason = $("#reason").val();
-        time_start =$("#year").val() +"-"+ $("#month").val() +"-" + $("#date").val() +" "+ $("#start-hour").val() + ":" + $("start-minute").val() + ":00" ;
-        time_end =  $("#year").val() +"-"+ $("#month").val() +"-" + $("#date").val() +" "+  $("#end-hour").val() + ":" + $("end-minute").val() + ":00";
+        time_start =$("#year").val() +"-"+ $("#month").val() +"-" + $("#date").val() +" "+ $("#start-hour").val() + ":" + $("#start-minute").val() + ":00" ;
+        time_end =  $("#year").val() +"-"+ $("#month").val() +"-" + $("#date").val() +" "+  $("#end-hour").val() + ":" + $("#end-minute").val() + ":00";
         $.ajax({
             url: "/save",
             type: "POST",
